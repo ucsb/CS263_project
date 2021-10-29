@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.temperature";
+option java_outer_classname = "TemperatureProto";
+option objc_class_prefix = "TMP";
+
+package temperature;
+
+service FehrenheitService {
+  // A Bidirectional streaming RPC.
+  //
+  // Accepts a stream of TempInFarenheit sent while a route is being traversed,
+  // while receiving other TempInCelsius .
+  rpc SendTempInFarenheit(stream TempInFarenheit) returns (stream TempInCelsius) {}
+}
+
+service CelsiusService {
+  // A Bidirectional streaming RPC.
+  //
+  // Accepts a stream of TempInCelsius sent while a route is being traversed,
+  // while receiving other TempInFarenheit . DISCLAIMER: Not sure if stream
+  // works with Empty
+  rpc SendTempInCelsius(stream TempInCelsius) returns (stream google.protobuf.Empty) {}
+}
+
+message TempInFahrenheit {
+    double fahrenheit = 1;
+}
+
+message TempInCelsius {
+    double celsius = 1;
+}
