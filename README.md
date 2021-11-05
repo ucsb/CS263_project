@@ -1,11 +1,5 @@
 # CS 263 Final Project, Fall 2021
 
-## What is Ambience?
+## Project Description and Goals
 
-Ambience is an operating system designed to support distributed applications structured as microservices. Ambience is designed to overcome two major challenges: the inability to run a common OS on multiple and various hardware platforms, and the negative impact general commodity operating systems can have on performance.
-
-## Project Description and Project Goals
-
-For this project, we will be implementing applications (e.g. microservices) to run on Ambience and identifying areas that are lacking from an application developer’s perspective. For instance, if an application developer wishes to run their microservice on Ambience, what are the tools needed to streamline this process that are not already present in Ambience? What additional abstractions could be added to Ambience to facilitate the application deployment process?
-
-We will begin by creating a sample microservice and running it using Kubernetes to get a feel for what is involved in deploying a service on a system like Kubernetes. Then, we will take the same service, try to run it on Ambience, and compare and contrast the experience of running the microservice on Ambience as opposed to Kubernetes. Ultimately, we aim to identify ways in which Ambience can be improved. 
+For this project we will be surveying and analyzing the ways in which developers write microservices today. We hope to come to an understanding of what frameworks, languages, libraries, and platforms are popular among microservices developers, and gain experience on how these tools work. How do they compare to each other and how easy are they to use from an application developers perspective? Is there a lot of community support and documentation for these tools? What types of applications are best implemented as microservices and what are the pros and cons of developing an application as a microservices? Ultimately we aim to learn more about how applications designed using a microservice architecture are written, and how the technologies involved in microservice implementation perform in terms of ease of use. 
