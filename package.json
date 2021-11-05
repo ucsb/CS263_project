@@ -1,0 +1,27 @@
+{
+  "name": "cs263_project",
+  "version": "1.0.0",
+  "description": "A \"Hello World\" microservice",
+  "main": "celsius_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucsb/CS263_project.git"
+  },
+  "author": "April Sanchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ucsb/CS263_project/issues"
+  },
+  "homepage": "https://github.com/ucsb/CS263_project#readme",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.0",
+    "async": "^1.5.2",
+    "google-protobuf": "^3.0.0",
+    "@grpc/grpc-js": "^1.1.0",
+    "lodash": "^4.6.1",
+    "minimist": "^1.2.0"
+  }
+}

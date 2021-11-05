@@ -25,24 +25,17 @@ function GenerateFahrenheitTemp() {
 }
 
 /**
- * getTempInCelsius handler. Receives a stream of Celsius temperatures,
+ * GetTemp handler. Receives a stream of Celsius temperatures,
  * and responds by sending a new tempature in Fahrenheit.
  * @param {Duplex} call The stream for incoming and outgoing messages
  */
-function sendTempInFahrenheit(call) {
-  call.on('data', function(note) {
-    var key = pointKey(note.location);
-    /* For each note sent, respond with all previous notes that correspond to
-     * the same point */
-    if (route_notes.hasOwnProperty(key)) {
-      _.each(route_notes[key], function(note) {
-        call.write(note);
-      });
-    } else {
-      route_notes[key] = [];
+function GetTemp(call) {
+  call.on('data', function() {
+    var temp = {
+      fahrenheit:GenerateFahrenheitTemp(),
+      celsius: 0.0
     }
-    // Then add the new note to the list
-    route_notes[key].push(JSON.parse(JSON.stringify(note)));
+    call.write(temp);
   });
   call.on('end', function() {
     call.end();
@@ -57,7 +50,7 @@ function sendTempInFahrenheit(call) {
 function getServer() {
   var server = new grpc.Server();
   server.addService(temperature.FahrenheitService.service, {
-    sendTempInFahrenheit: sendTempInFahrenheit
+    GetTemp: GetTemp
   });
   return server;
 }

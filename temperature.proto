@@ -7,27 +7,15 @@ option objc_class_prefix = "TMP";
 
 package temperature;
 
-service FehrenheitService {
+service FahrenheitService {
   // A Bidirectional streaming RPC.
   //
   // Accepts a stream of TempInFarenheit sent while a route is being traversed,
   // while receiving other TempInCelsius .
-  rpc SendTempInFarenheit(stream TempInFarenheit) returns (stream TempInCelsius) {}
+  rpc GetTemp(stream Temperature) returns (stream Temperature) {}
 }
 
-service CelsiusService {
-  // A Bidirectional streaming RPC.
-  //
-  // Accepts a stream of TempInCelsius sent while a route is being traversed,
-  // while receiving other TempInFarenheit . DISCLAIMER: Not sure if stream
-  // works with Empty
-  rpc SendTempInCelsius(stream TempInCelsius) returns (stream google.protobuf.Empty) {}
-}
-
-message TempInFahrenheit {
+message Temperature {
     double fahrenheit = 1;
-}
-
-message TempInCelsius {
-    double celsius = 1;
+    double celsius = 2;
 }
