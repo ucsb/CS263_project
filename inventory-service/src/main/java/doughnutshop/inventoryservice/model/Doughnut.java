@@ -2,10 +2,10 @@ package doughnutshop.inventoryservice.model;
 
 public class Doughnut {
     private String name;
-    private float price;
+    private double price;
     private int inventory;
 
-    public Doughnut(String name, float price, int inventory) {
+    public Doughnut(String name, double price, int inventory) {
         this.name = name;
         this.price = price;
         this.inventory = inventory;
@@ -19,11 +19,11 @@ public class Doughnut {
         this.name = name;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
