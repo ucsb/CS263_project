@@ -10,10 +10,13 @@ Despite their many advantages, applications designed using microservices can als
 
 ## What Applications are Best Suited to be Written as Microservices?
 
+TODO
 
 ## What are Some Tools Used to Develop Microservices? 
+### Spring Boot with Spring Cloud
+### *Why use Spring Boot with Spring Cloud to Develop Microservices?*
 
-(Discuss the learning curve of these tools, availability of documentation/community help/support, ease of development and performance for example microservice benchmarks and applications.)
+Spring Boot includes libraries with user-friendly APIs that make it easy to deal with many of the difficulties that come with writing Microservices. For example, dealing with partial failures, an issue that arises in many distributed systems of which microservices are not exempt, is made easy with Spring Boot’s fault tolerance library Resilience4J. Resilience4J provides various options to handle partial failures including circuit breakers, retry, timeout, rate limiters, and fallback handlers. Spring Cloud also adopts Eureka, an open source library created by Netflix, which handles service discovery for developers. Eureka uses client-side-discovery, and additionally implements load balancing. The daunting task of microservice communication is also made easy in Spring Boot with libraries such as RestTemplate and WebClient. Some added benefits of Spring Cloud include cloud native support (easy to deploy on Docker and Kuberenetes), as well as libraries to make load balancing and clustering easy. In the microservice we wrote using Spring Cloud, we focused primarily on experimenting with the RestTemplate and Eureka libraries, with a small side investigation into WebClient.
 
 ## What are Some Tools Used to Deploy Microservices? 
 
