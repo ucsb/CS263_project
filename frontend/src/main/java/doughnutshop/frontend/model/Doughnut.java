@@ -5,6 +5,10 @@ public class Doughnut {
     private double price;
     private int inventory;
 
+    public Doughnut(){
+
+    }
+
     public Doughnut(String name, double price, int inventory) {
         this.name = name;
         this.price = price;

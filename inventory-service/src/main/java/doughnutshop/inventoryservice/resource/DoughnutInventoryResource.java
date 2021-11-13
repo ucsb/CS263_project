@@ -22,7 +22,10 @@ public class DoughnutInventoryResource {
         doughnuts.add(new Doughnut("Chocolate", 2.00, 400));
         doughnuts.add(new Doughnut("Sugar", 2.00, 350));
         doughnuts.add(new Doughnut("Glazed", 2.00, 700));
-        return new DoughnutInventory(doughnuts);
+
+        DoughnutInventory doughnutInventory = new DoughnutInventory();
+        doughnutInventory.setDoughnutsInventory(doughnuts);
+        return doughnutInventory;
     }
 
 }
