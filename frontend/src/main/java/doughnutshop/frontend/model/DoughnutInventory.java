@@ -5,6 +5,10 @@ import java.util.List;
 public class DoughnutInventory {
     private List<Doughnut> doughnutsInventory;
 
+    public DoughnutInventory(){
+
+    }
+
     public DoughnutInventory(List<Doughnut> doughnutsInventory) {
         this.doughnutsInventory = doughnutsInventory;
     }
