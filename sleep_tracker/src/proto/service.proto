@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/ucsb/CS263_project/tree/main/sleep_tracker/src/proto";
+option go_package = "github.com/ucsb/CS263_project/tree/SleepTracker/sleep_tracker/src/proto";
 package proto;
 
 // Server Requests
