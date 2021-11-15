@@ -169,5 +169,5 @@ var SleepTrackerService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "src/proto/service.proto",
+	Metadata: "proto/service.proto",
 }

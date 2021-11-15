@@ -2,14 +2,16 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
-	"main/database"
-	"main/proto"
 	"net"
-	"os"
 	"strconv"
 	"strings"
+
+	"main/database"
+
+	"../proto"
 
 	"google.golang.org/grpc"
 )
@@ -19,6 +21,9 @@ type server struct {
 }
 
 var db database.Database
+var (
+	port = flag.Int("port", 10000, "The server port")
+)
 
 func (s *server) Get(ctx context.Context, in *proto.GetRequest) (*proto.ServerResponse, error) {
 	var err error
@@ -74,19 +79,20 @@ func generateResponse(value string, err error) (*proto.ServerResponse, error) {
 }
 
 func main() {
-	listener, err := net.Listen("tcp", ":4040")
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 	srv := grpc.NewServer()
-	databaseImplementation := os.Args[1]
+	// databaseImplementation := os.Args[1]
+	databaseImplementation := "redis"
 	db, err = database.Factory(databaseImplementation)
 	if err != nil {
 		panic(err)
 	}
 	proto.RegisterSleepTrackerServiceServer(srv, &server{})
 	fmt.Println("Prepare to serve")
-	if e := srv.Serve(listener); e != nil {
+	if e := srv.Serve(lis); e != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 }

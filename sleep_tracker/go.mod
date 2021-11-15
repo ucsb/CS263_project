@@ -1,4 +1,4 @@
-module main
+module github.com/ucsb/CS263_project/tree/SleepTracker/sleep_tracker
 
 go 1.17
 
