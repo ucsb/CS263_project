@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/ucsb/CS263_project/tree/SleepTracker/sleep_tracker/src/proto";
+option go_package = "github.com/ucsb/CS263_project/sleep_tracker/proto";
 package proto;
 
 // Server Requests
@@ -11,7 +11,7 @@ message SetRequest{
 }
 
 message GetRequest{
-    // Format: user:date
+    // Format: user:start_date:end_date
     string key = 1;
 }
 

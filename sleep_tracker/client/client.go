@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	pb "../proto"
+	pb "github.com/ucsb/CS263_project/sleep_tracker/proto"
 	"google.golang.org/grpc"
 )
 
@@ -25,12 +25,14 @@ func EnterHoursSlept(client pb.SleepTrackerServiceClient) {
 	fmt.Print("User: ")
 	fmt.Scan(&user)
 	fmt.Print("Date (MM/DD/YYYY) or enter -1 to quit: ")
+	fmt.Scan(&date)
 
 	for date != "-1" {
 		fmt.Print("Enter hours slept: ")
 		fmt.Scan(&hours)
 		InsertKey(client, user+":"+date, fmt.Sprint(hours))
 		fmt.Print("Date (MM/DD/YYYY) or enter -1 to quit: ")
+		fmt.Scan(&date)
 	}
 	fmt.Println("Finished entering hours.")
 }
@@ -70,13 +72,13 @@ func GetSleepingAverage(client pb.SleepTrackerServiceClient) {
 	fmt.Print("User: ")
 	fmt.Scan(&user)
 	fmt.Print("Start Date (MM/DD/YYYY): ")
-	fmt.Scan(start_date)
+	fmt.Scan(&start_date)
 	fmt.Print("End Date (MM/DD/YYYY): ")
 	fmt.Scan(&end_date)
 
 	key := user + ":" + start_date + ":" + end_date
 	ave := GetKey(client, key)
-	fmt.Println("You slept an average of " + fmt.Sprint(ave) + "hours per night.")
+	fmt.Println("You slept an average of " + fmt.Sprint(ave) + " hours per night.")
 
 }
 func PrintSleepingLog(client pb.SleepTrackerServiceClient) {
@@ -86,7 +88,7 @@ func PrintSleepingLog(client pb.SleepTrackerServiceClient) {
 }
 
 func main() {
-	conn, err := grpc.Dial(*serverAddr)
+	conn, err := grpc.Dial(*serverAddr, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}
