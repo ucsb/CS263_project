@@ -1,5 +1,6 @@
 package doughnutshop.inventoryservice.resource;
 
+import doughnutshop.inventoryservice.model.CheckoutDoughnut;
 import doughnutshop.inventoryservice.model.Doughnut;
 import doughnutshop.inventoryservice.model.DoughnutInventory;
 import doughnutshop.inventoryservice.service.DoughnutService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.zip.CheckedInputStream;
 
 @RestController
 @RequestMapping("/doughnuts")
@@ -48,19 +50,20 @@ public class DoughnutInventoryResource {
         return new ResponseEntity("Doughnut deleted successfully", HttpStatus.OK);
     }
 
-    @PostMapping(value = "/checkout/{name}")
-    public ResponseEntity<?> checkoutDoughnutByName(@PathVariable String name) {
-        Doughnut doughnut = doughnutService.findByName(name);
+    @PostMapping(value = "/checkout")
+    public ResponseEntity<?> checkoutDoughnutByName(@RequestBody CheckoutDoughnut checkoutDoughnut) {
+        Doughnut doughnut = doughnutService.findByName(checkoutDoughnut.getName());
         int doughnutInventory = doughnut.getInventory();
-        if (doughnutInventory > 1) {
-            Doughnut updatedDoughnut = new Doughnut(doughnut.getId(), doughnut.getName(), doughnut.getPrice(), doughnut.getInventory() - 1);
+        int doughnutsToBuy = checkoutDoughnut.getQuantity();
+        if (doughnutInventory > doughnutsToBuy) {
+            Doughnut updatedDoughnut = new Doughnut(doughnut.getId(), doughnut.getName(), doughnut.getPrice(), doughnutInventory - doughnutsToBuy);
             doughnut = doughnutService.saveOrUpdateDoughnut(updatedDoughnut);
             return new ResponseEntity("Doughnut checked out successfully, doughnut quantity is now " + doughnut.getInventory(), HttpStatus.OK);
-        } else if (doughnutInventory == 1) {
+        } else if (doughnutInventory == doughnutsToBuy) {
             doughnutService.deleteDoughnutById(doughnut.getId());
-            return new ResponseEntity("You got the last "+ doughnut.getName() +"!", HttpStatus.OK);
+            return new ResponseEntity("You got the last of the "+ doughnut.getName() +"Doughnuts!", HttpStatus.OK);
         } else {
-            return new ResponseEntity("Doughnut not available", HttpStatus.OK);
+            return new ResponseEntity("Sorry we don't have that many doughnuts available or we are completely sold out!", HttpStatus.OK);
         }
     }
 }
