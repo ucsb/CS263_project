@@ -33,7 +33,6 @@ def orders():
     output = ""
     for first, second in orders_list:
         output = output + first + " " + second + "<br />"
-    print(output)
     return output
 
 if __name__ == "__main__":
