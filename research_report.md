@@ -30,6 +30,11 @@ Using Eureka was arguably the most interesting and enjoyable part of developing 
 
 In summary, we found that Spring Cloud’s strength when it comes to writing microservices lies in its ability to provide easy to use libraries that abstract away many of the challenges microservices introduce to developers. These libraries allow for increased programmer productivity, and are incredibly easy to use. 
 
+## Flask
+### *Why use Flask to Develop Microservices?*
+TODO
+### *Experience with Usage:*
+Using Flask to develop microservices was very easy, and we found lots of great [documentation](https://stackabuse.com/spring-boot-and-flask-microservices-eureka-client/) to do so. However, we did encounter quite a bit of difficulty when it came to using python-eureka-client, a Python library that is meant to replicate Spring Cloud’s Eureka. The Python library is community driven and appears to be maintained by a single developer. We used this library in order to be able to connect the microservice we wrote using Flask to the microservice we wrote using Spring Cloud. Unfortunately, while we were able to make GET requests to our Spring Cloud application there was no documentation on how to make a POST request using python-eureka-client. Looking at the source code for python-eureka-client, we were able to make an attempt at making a POST request, but kept getting the same error. We also found a form post where a user was attempting to make a POST request in the same way, but was running into the same issue. There were no solutions on the form. As a result we had to change the request type we were making to a GET request that acted like a POST request. We found this experience to be a bit unfortunate since making a POST seems like an essential feature. This experience highlighted how even though one of the strengths of microservices is that each service can be implemented in a different language or using a different framework, some tools may not be available in other frameworks or may not be implemented as well, which could cause issues in developing the entirety of the application.
 
 ## What are Some Tools Used to Deploy Microservices? 
 
