@@ -37,7 +37,7 @@ public class DoughnutInventoryResource {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<?> saveOrUpdateStudent(@RequestBody Doughnut doughnut) {
+    public ResponseEntity<?> saveOrUpdateDoughnut(@RequestBody Doughnut doughnut) {
         doughnutService.saveOrUpdateDoughnut(doughnut);
         return new ResponseEntity("Doughnut added successfully", HttpStatus.OK);
     }
