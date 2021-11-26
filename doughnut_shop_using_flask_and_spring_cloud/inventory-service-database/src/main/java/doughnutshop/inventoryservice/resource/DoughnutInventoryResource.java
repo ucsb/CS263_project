@@ -50,11 +50,13 @@ public class DoughnutInventoryResource {
         return new ResponseEntity("Doughnut deleted successfully", HttpStatus.OK);
     }
 
-    @PostMapping(value = "/checkout")
-    public ResponseEntity<?> checkoutDoughnutByName(@RequestBody CheckoutDoughnut checkoutDoughnut) {
-        Doughnut doughnut = doughnutService.findByName(checkoutDoughnut.getName());
+    @GetMapping(value = "/checkout/{name}/{quantity}")
+    public ResponseEntity<?> checkoutDoughnutByName(@PathVariable String name, @PathVariable int quantity) {
+        //Doughnut doughnut = doughnutService.findByName(checkoutDoughnut.getName());
+        Doughnut doughnut = doughnutService.findByName(name);
         int doughnutInventory = doughnut.getInventory();
-        int doughnutsToBuy = checkoutDoughnut.getQuantity();
+        //int doughnutsToBuy = checkoutDoughnut.getQuantity();
+        int doughnutsToBuy = quantity;
         if (doughnutInventory > doughnutsToBuy) {
             Doughnut updatedDoughnut = new Doughnut(doughnut.getId(), doughnut.getName(), doughnut.getPrice(), doughnutInventory - doughnutsToBuy);
             doughnut = doughnutService.saveOrUpdateDoughnut(updatedDoughnut);
