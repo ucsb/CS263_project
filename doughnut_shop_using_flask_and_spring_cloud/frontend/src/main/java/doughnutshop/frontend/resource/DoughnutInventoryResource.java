@@ -28,5 +28,12 @@ public class DoughnutInventoryResource {
         return doughnutView;
     }
 
+    @RequestMapping("/orders")
+    public String getDoughnutOrders(){
+        String doughnutOrders = restTemplate.getForObject("http://checkout-service/orders", String.class);
+        return doughnutOrders;
+    }
+
+
 }
 
