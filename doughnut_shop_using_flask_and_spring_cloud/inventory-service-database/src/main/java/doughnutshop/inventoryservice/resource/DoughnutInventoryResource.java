@@ -47,4 +47,20 @@ public class DoughnutInventoryResource {
         doughnutService.deleteDoughnutById(doughnutService.findByName(name).getId());
         return new ResponseEntity("Doughnut deleted successfully", HttpStatus.OK);
     }
+
+    @PostMapping(value = "/checkout/{name}")
+    public ResponseEntity<?> checkoutDoughnutByName(@PathVariable String name) {
+        Doughnut doughnut = doughnutService.findByName(name);
+        int doughnutInventory = doughnut.getInventory();
+        if (doughnutInventory > 1) {
+            Doughnut updatedDoughnut = new Doughnut(doughnut.getId(), doughnut.getName(), doughnut.getPrice(), doughnut.getInventory() - 1);
+            doughnut = doughnutService.saveOrUpdateDoughnut(updatedDoughnut);
+            return new ResponseEntity("Doughnut checked out successfully, doughnut quantity is now " + doughnut.getInventory(), HttpStatus.OK);
+        } else if (doughnutInventory == 1) {
+            doughnutService.deleteDoughnutById(doughnut.getId());
+            return new ResponseEntity("You got the last "+ doughnut.getName() +"!", HttpStatus.OK);
+        } else {
+            return new ResponseEntity("Doughnut not available", HttpStatus.OK);
+        }
+    }
 }
