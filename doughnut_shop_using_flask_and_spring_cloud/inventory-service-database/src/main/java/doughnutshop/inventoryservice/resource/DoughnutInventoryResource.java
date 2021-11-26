@@ -60,10 +60,12 @@ public class DoughnutInventoryResource {
         if (doughnutInventory > doughnutsToBuy) {
             Doughnut updatedDoughnut = new Doughnut(doughnut.getId(), doughnut.getName(), doughnut.getPrice(), doughnutInventory - doughnutsToBuy);
             doughnut = doughnutService.saveOrUpdateDoughnut(updatedDoughnut);
-            return new ResponseEntity("Doughnut checked out successfully, doughnut quantity is now " + doughnut.getInventory(), HttpStatus.OK);
+            return new ResponseEntity("Doughnut checked out successfully", HttpStatus.OK);
+            //return new ResponseEntity("Doughnut checked out successfully, doughnut quantity is now " + doughnut.getInventory(), HttpStatus.OK);
         } else if (doughnutInventory == doughnutsToBuy) {
             doughnutService.deleteDoughnutById(doughnut.getId());
-            return new ResponseEntity("You got the last of the "+ doughnut.getName() +"Doughnuts!", HttpStatus.OK);
+            return new ResponseEntity("Doughnut checked out successfully", HttpStatus.OK);
+            //return new ResponseEntity("You got the last of the "+ doughnut.getName() +"Doughnuts!", HttpStatus.OK);
         } else {
             return new ResponseEntity("Sorry we don't have that many doughnuts available or we are completely sold out!", HttpStatus.OK);
         }
