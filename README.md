@@ -73,3 +73,27 @@ You can view the doughnut orders from the Checkout Service at http://localhost:8
 After making a POST request to the Checkout Service in order to purchase a doughnut, you can refresh http://localhost:8084/orders and see that the doughnut order has been added. Upon refreshing the Frontend Service you can see that the doughnut inventory has decreased. You can see these same changes reflected in the Inventory Service as well. This is because the Checkout Service communicates with the Inventory Service, which communicates with the Frontend service to reflect this change in inventory. Finally, you can see on the Frontend by visitng http://localhost:8081/doughnuts/orders that the Checkout Service sends the list of orders to the Frontend upon request.
 
 This application demonstrates how microservices communicate and exchange information, and how important it is for communication between microservices to be quick. It also illustrates how applications are divided into seperate services and have their own functionality. 
+
+### SleepTracker
+
+Another sample microservice we wrote was SleepTracker, a simple program for calculating the average number of hours you slept. SleepTracker was written in Go and uses gRPC as the method of communication between the server and client, as well as Protocol Buffers for exchanging data. 
+
+To run SleepTracker locally on the commandline:
+
+1. Install the latest version of Go (see [here](https://go.dev/doc/install) for installation instructions).
+2. Open your terminal and navigate to your home directory by typing ```cd``` into your terminal.
+3. Git clone the SleepTracker repo (found [here](https://github.com/aprilsanchez/SleepTracker)).
+4. cd into the cloned repository.
+  ```cd SleepTracker```
+5. You may need to add ```$GOPATH/bin``` to your ```$PATH``` so that executables installed via ```go get``` are available on your $PATH.
+  For example, on MacOS, you can type the following into the terminal:
+  ```export PATH=$PATH:$(go env GOPATH)/bin```
+7. Run the server by typing the following command into your terminal:
+  ```go run sleep_tracker/server/server.go```
+8. Open another terminal window and navigate to the SleepTracker directory again.
+9. Run the client by typing the following command into your terminal:
+  ```go run sleep_tracker/client/client.go```
+10. Follow the commands prompted by the client to interact with the SleepTracker.
+
+Note: SleepTracker was implented to gain familiarity with Go, gRPC, and Protocol Buffers. It was not designed to be fully \
+functional and as such, may contain bugs.
